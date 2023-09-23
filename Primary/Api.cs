@@ -69,6 +69,27 @@ namespace Primary
             return result.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// Logout from server
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> Logout()
+        {
+            var uri = new Uri(BaseUri, "/auth/removeToken");
+
+            // Header already there
+            // HttpClient.DefaultRequestHeaders.Add("X-Auth-Token", AccessToken.ToString());
+
+            var result = await HttpClient.GetAsync(uri);
+
+            if (result.IsSuccessStatusCode)
+            {
+                AccessToken = string.Empty;
+            }
+
+            return result.IsSuccessStatusCode;
+        }
+
         public const string DemoUsername = "naicigam2046";
         public const string DemoPassword = "nczhmL9@";
         public const string DemoAccount = "REM2046";
